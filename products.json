@@ -10,5 +10,12 @@
     "price": "80",
     "image": "img/1676524550623.jpeg",
     "inStock": true
+  },
+  {
+    "code": "009713",
+    "name": "Test-5",
+    "price": "70",
+    "image": "img/Orange_and_Purple_Gradient_Modern_Motivational_Quote_Tweet_Instagram_Post_20250520_015946_0000-removebg-preview.png",
+    "inStock": true
   }
 ]
