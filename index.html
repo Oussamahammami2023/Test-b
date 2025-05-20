@@ -1147,7 +1147,7 @@
  let products = [];
 
 window.onload = function() {
-  fetch('/1-data/products.json')
+  fetch('products.json')
     .then(response => response.json())
     .then(data => {
       products = data; // تخزين البيانات في المتغير
