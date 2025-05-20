@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "name": "Test 2",
+    "price": "60",
+    "image": "img/104288_VO-UmpOkigKlCMeXf4wG5ztnl_max.webp",
+    "inStock": true
+  }
+]
