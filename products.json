@@ -4,5 +4,11 @@
     "price": "50",
     "image": "img/104288_VO-UmpOkigKlCMeXf4wG5ztnl_max.webp",
     "inStock": true
+  },
+  {
+    "name": "Test 4",
+    "price": "80",
+    "image": "img/1676524550623.jpeg",
+    "inStock": true
   }
 ]
