@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <style>
+  body, html {
+   font-family: 'Montserrat', sans-serif;
+   margin: 0;
+   padding: 0;
+}
+.logo img {
+  position: absolute;
+  position: fixed;
+  height:40px;
+  width: auto;
+  top:10px;
+  left:15px;
+}
+.contact {
+  position: fixed;
+  top:20px;
+  right:10px;
+}
+.contact img {
+  height:20px;
+  width:20px;
+  margin-left:10px;
+}
+.hero {
+  background: url('/img/interface /452260797_919947656605629_4035277211699045792_n.jpg') no-repeat center center/cover;
+    z-index: 0;
+    background-attachment: fixed;
+    height: 102.5vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+.hero-content {
+    z-index: 1;
+    display:flex;
+    position: absolute;
+    text-align: center; 
+    color: white;
+    left:90px;
+    top:180px;
+}
+ .hero-content h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+        }
+ .hero-content h1 {
+   animation: fadeInOut 3s ease forwards; 
+}
+           @keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px); 
+    }
+    30% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(70px);
+    }
+           }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.0); 
+}
+     .ouvrir{
+      position: absolute; 
+      height:70px;
+      width:310px;
+      left:40px;
+      transform: perspective(160px) rotateX(36deg) translateY(5px);
+      border-top-right-radius: 50px;
+      border-top-left-radius: 50px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-top: -85px;
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      background-color:#fff;
+    box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.5s ease; 
+    }
+    .top {
+      position: relative; 
+      z-index: 2;
+      color: white; 
+      padding: 10px 20px; 
+      border: none; 
+      margin-top:-10px;
+      border-radius: 7px; 
+      cursor: pointer;
+      transition: opacity 0.5s ease; 
+     font-size: 16px;
+     transform: perspective(200px) rotateX(15deg);
+     font-weight: 900;
+     background: linear-gradient(  0deg,
+     rgba(63, 94, 251, 1) 0%,
+     rgba(70, 135, 252, 1) 100% );
+     box-shadow: rgba(63, 94, 251, 0.2) 0px 40px 29px 0px;
+     will-change: transform;
+     transition: all 0.3s;
+     border-bottom: 2px solid rgba(70, 135, 252, 1);
+}
+ /* تنسيق قسم الشعار */
+.logo2 {
+  display: flex;
+  background-color:#fff;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 5px 10px; 
+  box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.1);
+}
+ .logo2-span {
+   position: relative;
+  background: linear-gradient(90deg, #6ec1ff, #ab47bc);
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+   font-size: 20px;
+   font-weight: 900;
+   top:5px;
+   left:0px;
+ }
+.notification-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.notification-icon svg {
+  fill: #000; 
+  width: 26px;
+  height: 26px;
+}
+.header {
+  position: sticky;
+  z-index: 10;
+  width:100%;
+  top:0px;
+}
+.search-container {
+  position : relative;
+  display: flex;
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 0;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+}
+.placeholders {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    font-weight: 500;
+    pointer-events: none;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.r1, .r2, .r3 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    font-size: 13.5px;
+    left: 30px;
+    z-index: 2;
+    height: 5px;
+    opacity: 0;
+    width: fit-content; 
+    white-space: nowrap;
+}
+
+/* نفس الحركة للجميع مع تأخير زمني مناسب */
+@keyframes fadeText {
+    0% { opacity: 0; transform: translateY(20px); }
+    10%, 45% { opacity: 1; transform: translateY(0); }
+    55% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 0; }
+}
+
+/* نص 1 */
+.r1 {
+    animation: fadeText 6s infinite;
+}
+
+/* نص 2 */
+.r2 {
+    animation: fadeText 6s infinite;
+    animation-delay: 2.5s;
+}
+
+/* نص 3 */
+.r3 {
+    animation: fadeText 6s infinite;
+    animation-delay: 5s;
+}
+.search-container input {
+  padding: 11px 20px;
+  position: absolute;
+  font-size: 14px;
+  z-index: 1;
+  font-weight: 500;
+  color: #000;
+  width: 93%;
+  border: 1.3px solid #000;
+  box-shadow: -2px  -2px  10px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  margin-top : 0px;
+  box-sizing: border-box;
+}
+
+.search-container button {
+  background-color: #4CAF50;
+  box-shadow: 0px -5px 15px rgba(0, 0, 0, 0.2);
+  color: white;
+  z-index: 1;
+  border: none;
+  padding: 8.5px 17px;
+  margin-bottom:-34px;
+  font-size: 16px;
+  position: absolute;
+  right:17px;
+  transform: translateY(-50%);
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-container button svg {
+  width: 17px; 
+  height: 17px;
+  fill: white; 
+}
+
+.search-container button:hover {
+  background-color: #45a049;
+}
+  .collection {
+   display: flex;
+    overflow-x: auto; 
+    white-space: nowrap;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 0px 0;
+    margin-top :-7px;
+    background-color: #ffffff;
+    left: 0;
+    right: 0;
+    scrollbar-width: none;
+   -ms-overflow-style: none;
+}
+   .collection div {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 13px 12px;
+    }
+  .collection div.active {
+    font-weight: 900;
+    color: #000;
+    background: linear-gradient(90deg, #6ed1ff, #ab57dc);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    position: relative;
+   }
+   .collection a {
+    text-decoration: none;
+    color: inherit;
+}
+.collection::-webkit-scrollbar {
+ display: none;
+}
+.slideshow-container-1 {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height:208px;
+  max-width: 608px;
+  top :-7px;
+  margin: auto;
+  overflow: hidden;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.slides-wrapper {
+  display: flex;
+  transition: transform 0.8s ease;
+  scroll-behavior: smooth;
+}
+
+.slide-1 {
+  min-width: 90%;
+  padding: 0 4px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+.slide-1 a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 280px;
+}
+.slide-1 img {
+  width: 100%;
+  height: 65%;
+  object-fit: content;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+ .deal {
+  display: flex;
+  padding: 0px 9px;
+  }
+ .h2-container {
+  margin-top: -2px;
+  margin-bottom: 5px;
+  font-size: 18.5px;
+  font-weight: 900;
+  }
+ .h3-container {
+   padding: 0 9px;
+  margin-top :3px;
+  color:#2F7944;
+  font-size: 15px;
+  font-weight: 420;
+  }
+ .counter {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  padding: 0 5px;
+  right:0;
+  font-size: 12px;
+  font-weight: 1000;
+  }
+ .text-c {
+  font-size: 13px;
+  font-weight: 400;
+  margin-right: 2px;
+ }
+ .box {
+  width: 24px;
+  height: 20px;
+  background: linear-gradient(90deg, #6ec1fd, #ab45bc);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0;
+  border-radius: 5px;
+  }
+ .separator {
+  margin: 0 4px;
+ }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    padding: 5px;
+   }
+   .blog {
+    background-color: #fff;
+    border-radius: 3px;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-bottom-left-radius: 15px; 
+    border-bottom-right-radius: 15px; 
+   }
+  .container::-webkit-scrollbar {
+   display: none;
+}
+   .blog img {
+    width: 100%;
+    aspect-ratio: 4 / 4;
+    object-fit: contain;
+    display: block; 
+    margin: 0; 
+    padding: 0; 
+    border: 1px solid #ddd;
+    border-radius :8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+   }
+   .blog-info {
+    padding: 0;
+    text-align: left;
+    width: 145px;
+    height:80px;
+   }
+   .blog-info .price {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 10px;
+    margin-bottom :10px;
+   }
+   .old-price {
+    font-size: 12px;
+    color: #d32f2f;
+    text-decoration: line-through;
+    margin-right : 5px;
+}
+.discount {
+    font-size: 12px;
+    color: #888;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom:4px;
+}
+.alternating-titles {
+    font-size: 12px;
+    margin-top:5px;
+    color: #555;
+    position: absolute;
+    left: 0px;
+    right: 5px;
+    text-align: left;
+    overflow: hidden;
+    height: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.mp {
+    display: block;
+    margin-right: 5px;
+    color: #4CAF50;
+    font-size: 20px;
+    position: absolute; 
+    opacity: 0;
+    animation: alternateFadeMP 6s infinite; /* تغيير الأنيمشن لتتزامن مع t1 */
+}
+
+@keyframes alternateFadeMP {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    10%, 40% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.t1 {
+    animation: alternateFadeT1 6s infinite; /* أنيمشن خاص بـ t1 */
+    animation-delay: 0s; /* Start
+    immediately */
+    margin-left: 17px;
+}
+
+@keyframes alternateFadeT1 {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    10%, 40% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.container-b1-t2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: absolute;
+    left: 0;
+    height: 36px;
+    opacity: 0;
+    animation: alternateFadeContainer 6s infinite;
+    animation-delay: 2.5s;
+    width: fit-content; /* الحاوية تتكيف مع المحتوى */
+}
+
+.B1 {
+    width: 15px; 
+    height: 15px; 
+    margin-right: 5px;
+    margin-left: 3px;
+    border-radius: 50%; 
+    overflow: hidden; 
+}
+
+.B1 img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; /* ضمان تناسب الصورة داخل العنصر */
+}
+
+.t2 {
+    white-space: nowrap; 
+}
+@keyframes alternateFadeContainer {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    10%, 60% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    70% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.divider2 {
+  border-top: 2px solid #F1F1F1;
+  margin-top: 15px;
+}
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin:10px;
+}
+
+.grid-container {
+    display: grid;
+    margin:10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.collection-1 {
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.collection-1 img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.collection-1 p {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+.h4-container {
+    padding: 0 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   margin-top: 0;
+   margin-bottom: 5px;
+  font-size: 18.5px;
+  font-weight: 1000;
+  }
+   #product-modal {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: flex-end;
+    justify-content: center;
+   }
+   #product-modal .modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    max-height: 100vh;
+    background: #fff;
+    overflow-y: auto ;
+    animation: slide-up 0.3s ease-out;
+   }
+   #product-modal .modal-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+   }
+   @keyframes slide-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+ }
+#product-modal #slideshow {
+  display: flex; 
+  overflow-x: scroll; 
+  scroll-snap-type: x mandatory; 
+  scroll-behavior: smooth; 
+}
+
+#product-modal .slide {
+  min-width: 100%; 
+  scroll-snap-align: start; 
+}
+#product-modal .slide img {
+  width: 100%; 
+  height: 350px; 
+  object-fit: contain; /* الحفاظ على أبعاد الصورة بدون تشويه */
+}
+#product-modal .modal-description-container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 10px;
+  position: relative;
+  overflow: visible;
+}
+#product-modal .modal-description-container .description {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 450;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+#product-modal .price {
+  font-family: 'Helvetica', sans-serif;
+  font-size: 19px; 
+  font-weight: 700; 
+  color: #333; 
+  padding: 0px;
+  text-align: left; 
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+#product-modal .ratting {
+  margin-top: 12px;
+  margin-bottom: -10px;
+  display: flex;
+  align-items: center;
+}
+
+#product-modal .ratting .sr {
+  width: 16px;
+  height: 16px;
+  fill: #F6B01D;
+  margin-right: 2px; 
+}
+#product-modal .ratting .score {
+  color: #777;
+  font-weight: 500;
+  font-size: 12px;
+  margin-top: 2px;
+  margin-left: 2px;
+}
+#product-modal .image-section {
+  padding: 0 10px;
+  margin-bottom: -11px;
+}
+#product-modal .image-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#product-modal .image-label {
+  font-size: 13px;
+  font-weight: bold;
+}
+#product-modal .image-selection {
+  display: flex;
+  gap: 10px;
+}
+#product-modal .image-option {
+  width: 40px;
+  height: 40px;
+  border-radius :10px;
+  border: 2px solid #ddd;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+#product-modal .image-option img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#product-modal .image-option:hover {
+  transform: scale(1.1);
+  border-color: #333;
+}
+#product-modal .s-section {
+  max-width: 600px;
+  margin: auto;
+  border-radius:15px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+#product-modal .s-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -px;
+}
+#product-modal .s-label {
+  font-weight: bold;
+  font-size: 13px;
+}
+#product-modal .Guide {
+  font-size: 12px;
+  color: #25629A;
+  cursor: pointer;
+  text-decoration: none; 
+  font-weight: 500;
+  margin-bottom :-5px;
+}
+#product-modal .s-selection {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+}
+#product-modal .s-option {
+  width: 70px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  font-weight: bold;
+}
+#product-modal .h2 {
+   padding: 0 10px;
+   margin-top: 15px;
+   margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 650;
+  
+}
+#product-modal .product-list {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 0 10px;
+  overflow-x: auto;
+  margin-bottom: 80px;
+}
+#product-modal .product-item {
+  width: 180px;
+  height:280px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #ddd; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+#product-modal .product-item img {
+  width: 180px;
+  height: 175px;
+  border-radius: 10px;
+  border-bottom: 1px solid #ddd;
+    border-bottom-left-radius: 15px; 
+    border-bottom-right-radius: 15px; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+#product-modal .product-item .description {
+  font-size: 14px;
+  margin-left:10px;
+  margin-top: 11px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+  text-align: center; 
+}
+#product-modal .ratting2 {
+  margin-top: 2px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#product-modal .ratting2 .sr2 {
+  width: 14px;
+  height: 14px;
+  fill: #F6B01D;
+  margin-right: 2px; 
+}
+#product-modal .ratting2 .score2 {
+  color: #777;
+  font-weight: 500;
+  font-size: 12px;
+  margin-top: 2px;
+  margin-left: 2px;
+}
+#product-modal .product-item .price {
+  font-family: 'Helvetica', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  color: #000;
+}
+#product-modal .m-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  z-index: 1000;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  background-color: #ffffff;
+  padding: 15px 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+  #product-modal .m-container .main-button {
+  width:330px;
+  height:40px;
+  margin-right: 5px;
+  background-color: #00579C; 
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+ }
+ #product-modal .close-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+#product-modal .close-btn:hover {
+  background-color: #f0f0f0;
+}
+#product-modal .close-btn svg {
+  fill: black;
+  width: 24px;
+  height: 24px;
+}
+#iframe-modal {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  align-items: flex-end;
+  justify-content: center;
+}
+#iframe-modal .modal-content {
+  position: fixed;
+  width: 100%;
+  max-width: 500px;
+  height: 100vh;
+  background: #fff;
+  overflow: hidden;
+  z-index: 1000; 
+  animation: iframe-slide-up 0.3s ease-out;
+}
+#iframe-content {
+  width: 103%; 
+  height: 130vh; 
+  border: none; 
+  border-radius: 0;
+  margin-top: -70px;
+  display: block;
+  margin-left: -3px;
+  margin-right: -3px;
+}
+@keyframes iframe-slide-up {
+  from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+   to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+#iframe-modal .close-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+#iframe-modal .close-btn:hover {
+  background-color: #e0e0e0;
+}
+#iframe-modal .close-btn svg {
+  fill: black ;
+  width: 20px;
+  height: 20px;
+}
+ .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+    z-index: 10;
+}
+.icon {
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.icon img {
+  width: 40px;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+}
+
+.icon span {
+  font-size: 10px;
+  font-weight: 500;
+  display: block;
+  margin-top: 2px;
+}
+    </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="overlay"></div>
+    <div class="logo"
+    <img src="/logo /logo (1).png"></div>
+   	<div class="contact">
+						<a href="index.html"><img src="/icon /map-icon.png"></a>
+						<a href="#"><img src="/icon /phone-icon.png"></a>
+						<a href="#"><img src="/logo /logo (1).png"></a>
+						<a href="#"><img src="/logo /logo (1).png"></a>
+						<button class="btn-show-sidebar m-l-33 trans-0-4"></button>
+					</div>
+        <!-- Title -->
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Welcome</h1>
+        </div>
+    </div>
+    </div>
+       <div class="ouvrir">
+    <button class="top" id="fade-button" type="button" onclick="scrollToSection()">Collection</button>
+  </div>
+    <div class="logo2">
+   <span class="logo2-span">Store logo</span>
+    <button class="notification-icon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64">
+  <!-- شكل الجرس -->
+ <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.146 3.248a2 2 0 0 1 3.708 0A7.003 7.003 0 0 1 19 10v4.697l1.832 2.748A1 1 0 0 1 20 19h-4.535a3.501 3.501 0 0 1-6.93 0H4a1 1 0 0 1-.832-1.555L5 14.697V10c0-3.224 2.18-5.94 5.146-6.752zM10.586 19a1.5 1.5 0 0 0 2.829 0h-2.83zM12 5a5 5 0 0 0-5 5v5a1 1 0 0 1-.168.555L5.869 17H18.13l-.963-1.445A1 1 0 0 1 17 15v-5a5 5 0 0 0-5-5z" fill="#0D0D0D"/>
+
+  <!-- الدائرة الحمراء -->
+  <circle cx="17" cy="6" r="6" fill="red" />
+
+  <!-- النص داخل الدائرة -->
+  <text x="17" y="8" font-size="8" fill="white" text-anchor="middle" font-family="Arial" font-weight="bold">1</text></text>
+</svg>
+    </button>
+  </div>
+  <div class="header">
+<div class="search-container">
+  <div class="placeholders">
+    <span class="r1">Recherche...</span>
+    <span class="r2">T-shirt</span>
+     <span class="r3">Chaussure</span>
+  </div>
+  <input type="text" id="search-input" placeholder="">
+  <button onclick="search()">
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1664 1792"><path d="M1152 832q0-185-131.5-316.5t-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5 316.5-131.5 131.5-316.5zm512 832q0 52-38 90t-90 38q-54 0-90-38l-343-342q-179 124-399 124-143 0-273.5-55.5t-225-150-150-225-55.5-273.5 55.5-273.5 150-225 225-150 273.5-55.5 273.5 55.5 225 150 150 225 55.5 273.5q0 220-124 399l343 343q37 37 37 90z"/></svg>
+  </button>
+</div>
+
+  <!-- Navigation -->
+  <div class="collection">
+    <div class="active"><a href="#">Vêtements</a></div>
+    <div><a href="/2 travaux.html">Accessoires</a></div>
+    <div><a href="/T2-main/index3.html">Santé & Beauté</a></div>
+    <div><a href="/T2-main/index4.html">Smartphones</a></div>
+    <div><a href="/T2-main/index6.html">Santé & Beauté</a></div>
+    <div><a href="/T2-main/index7.html">Services de mariage</a></div>
+  </div>
+</div>
+
+
+   
+ <div class="container" id="products-container"></div>
+
+ <div class="modal" id="product-modal">
+ <div class="modal-content">
+ <button class="close-btn" id="close-modal">
+ <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+ <path fill="none" d="M0 0h24v24H0z" />
+ <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z" /></svg>
+ </button>
+ <div id="slideshow"></div>
+ <div id="pagination-dots" class="pagination-dots"></div>
+ <div class="modal-description-container" id="modal-description-container"></div>
+ <p id="modal-price"></p>
+<div class="image-section">
+<div class="image-header">
+<p class="image-label">Couleur:</p>
+</div>
+<div class="image-selection">
+<div class="image-option">
+<img src="https://via.placeholder.com/50x50" alt="Option 1">
+</div>
+<div class="image-option">
+<img src="https://via.placeholder.com/50x50" alt="Option 2">
+</div>
+<div class="image-option">
+<img src="https://via.placeholder.com/50x50" alt="Option 3">
+</div>
+<div class="image-option">
+<img src="https://via.placeholder.com/50x50" alt="Option 4">
+    </div>
+  </div>
+</div>
+<div class="s-section">
+<div class="s-header">
+<p class="s-label">Size:</p>
+<a href="https://www.example.com" target="_blank" id="size-info-title" class="Guide">Guide des tailles</a>
+</div>
+<div class="s-selection">
+<div class="s-option">S</div>
+<div class="s-option">M</div>
+<div class="s-option">L</div>
+<div class="s-option">XL</div>
+<div class="s-option">XXL</div>
+</div>
+</div>
+<p class="h2">Vous aimerez aussi</p>
+<div class="product-list" id="product-list"></div>
+  </div>
+</div>
+<div class="modal" id="iframe-modal">
+ <div class="modal-content">
+ <button class="close-btn" id="close-iframe-modal">
+ <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+ <path fill="none" d="M0 0h24v24H0z" />
+ <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
+ </svg>
+ </button>
+ <iframe id="iframe-content" frameborder="0"></iframe>
+  </div>
+</div>
+  <div class="footer">
+  <a href="/1-r.html" class="icon">
+    <img src="icons/home.png" alt="Icon">
+    <span>Restaurants</span>
+  </a>
+  <a href="/c5.html" class="icon">
+    <img src="/b.html" alt="Icon">
+    <span>Boutiques</span>
+  </a>
+  <a href="/mp2.html" class="icon center-icon">
+    <img src="/icon /IMG_20250222_001033-removebg-preview.png" alt="Icon">
+    <span>Immobilier</span>
+  </a>
+  <a href="/4-artisan.html" class="icon">
+    <img src="/icon /IMG_20250222_005757.png" alt="Icon">
+    <span>Travaux</span>
+  </a>
+  <a href="/5-médecin.html" class="icon">
+    <img src="icons/menu.png" alt="Icon">
+    <span>Médecin</span>
+  </a>
+</div>
+ <script>
+ let products = [];
+
+window.onload = function() {
+  fetch('/1-data/products.json')
+    .then(response => response.json())
+    .then(data => {
+      products = data; // تخزين البيانات في المتغير
+      displayProducts(products); // عرض المنتجات
+    })
+    .catch(error => {
+      console.error("فشل تحميل المنتجات:", error);
+    });
+};
+  const searchInput = document.getElementById('search-input');
+  const container = document.getElementById('products-container');
+  const modal = document.getElementById('product-modal');
+  const slideshow = document.getElementById('slideshow');
+  const modalDescriptionContainer = document.getElementById('modal-description-container');
+  const modalPrice = document.getElementById('modal-price');
+  const closeModal = document.getElementById('close-modal');
+  const productList = document.getElementById('product-list');
+  const iframeModal = document.getElementById('iframe-modal');
+  const closeIframeModal = document.getElementById('close-iframe-modal');
+  const iframeContent = document.getElementById('iframe-content');
+  const paginationDots = document.getElementById('pagination-dots');
+  const slides = document.querySelectorAll('.slide-1');
+const slidesWrapper = document.querySelector('.slides-wrapper');
+const slideshowContainer = document.querySelector('.slideshow-container-1');
+
+  // متغيرات تتبع للحالة الحالية
+  let currentModalProduct = null;
+  let currentOpenBlog = null;
+  let isProductFromHomepage = true;
+
+
+
+const placeholderTexts = ["Recherche...", "T-shirt", "Chaussure"];
+let index = 0;
+
+function updatePlaceholders() {
+  document.querySelector(".r1").textContent = placeholderTexts[index];
+  document.querySelector(".r2").textContent = placeholderTexts[(index + 1) % placeholderTexts.length];
+  document.querySelector(".r3").textContent = placeholderTexts[(index + 2) % placeholderTexts.length];
+  index = (index + 1) % placeholderTexts.length;
+}
+
+// التحديث الأولي
+setInterval(() => {
+  // إعادة تعيين الرسوم المتحركة
+  ['.r1', '.r2', '.r3'].forEach(selector => {
+    const el = document.querySelector(selector);
+    el.style.animation = 'none';
+    void el.offsetHeight; // إعادة التصيير
+    el.style.animation = null;
+  });
+  
+  // تحديث النصوص
+  index = (index + 1) % placeholderTexts.length;
+  const next = [
+    placeholderTexts[index],
+    placeholderTexts[(index + 1) % 3],
+    placeholderTexts[(index + 2) % 3]
+  ];
+  
+  document.querySelector(".r1").textContent = next[0];
+  document.querySelector(".r2").textContent = next[1];
+  document.querySelector(".r3").textContent = next[2];
+}, 6000); // 6 ثواني = مدة دورة كاملة
+searchInput.addEventListener("input", () => {
+  placeholders.style.display = searchInput.value.trim() ? "none" : "block";
+});
+
+// دالة البحث
+function search() {
+  const query = searchInput.value.toLowerCase();
+  const filteredProducts = products.filter(product =>
+    product.description.toLowerCase().includes(query)
+  );
+  displayProducts(filteredProducts); // عرض المنتجات المفلترة
+}
+
+let currentIndex = 0;
+const totalSlides = slides.length;
+
+function showSlide(index) {
+  const slideWidth = slides[0].offsetWidth; // عرض الشريحة
+  const containerWidth = slideshowContainer.offsetWidth; // عرض الحاوية
+
+  let offset;
+  if (index === 0) {
+    // إذا كانت الصورة الأولى، اجعلها في أقصى اليسار
+    offset = 0;
+  } else {
+    // بقية الصور تكون متمركزة
+    offset = -index * slideWidth + (containerWidth - slideWidth) / 2;
+  }
+
+  slidesWrapper.style.transform = `translateX(${offset}px)`;
+}
+
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % totalSlides;
+  showSlide(currentIndex);
+}
+
+// تحديث عند تغيير حجم النافذة
+window.addEventListener('resize', () => showSlide(currentIndex));
+
+// بدء عرض الشرائح
+setInterval(nextSlide, 4000);
+
+// عرض الشريحة الأولى عند بدء التشغيل
+showSlide(currentIndex);
+const TARGET_TIME_KEY = "targetTime";
+
+        function startCounter() {
+            const hoursBox = document.getElementById("hours");
+            const minutesBox = document.getElementById("minutes");
+            const secondsBox = document.getElementById("seconds");
+
+            // احصل على وقت النهاية من localStorage أو قم بتعيين وقت جديد
+            let targetTime = localStorage.getItem(TARGET_TIME_KEY);
+            if (!targetTime) {
+                // تعيين وقت انتهاء جديد (بعد 23 ساعة و1 دقيقة و9 ثوانٍ من الآن)
+                targetTime = Date.now() + (23 * 3600 + 1 * 60 + 9) * 1000;
+                localStorage.setItem(TARGET_TIME_KEY, targetTime);
+            } else {
+                targetTime = parseInt(targetTime, 10);
+            }
+
+            function updateCounter() {
+                const now = Date.now();
+                const timeLeft = targetTime - now;
+
+                if (timeLeft > 0) {
+                    const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                    hoursBox.textContent = hours.toString().padStart(2, "0");
+                    minutesBox.textContent = minutes.toString().padStart(2, "0");
+                    secondsBox.textContent = seconds.toString().padStart(2, "0");
+                } else {
+                    // إذا انتهى العداد، قم بإعادة تعيينه أو تنفيذ أي إجراء
+                    localStorage.removeItem(TARGET_TIME_KEY);
+                    hoursBox.textContent = "00";
+                    minutesBox.textContent = "00";
+                    secondsBox.textContent = "00";
+                }
+            }
+
+            updateCounter();
+            setInterval(updateCounter, 1000);
+        }
+
+        startCounter();
+// دالة لعرض المنتجات
+function displayProducts(productsToDisplay) {
+  container.innerHTML = ''; // مسح المنتجات السابقة قبل عرض المفلترة
+
+  // تكرار المنتجات وإضافة الأحداث
+  productsToDisplay.forEach((product, index) => {
+    const blog = document.createElement('div');
+    blog.classList.add('blog');
+    blog.innerHTML = `
+      <img src="${product.images[0]}" alt="Product ${index + 1}" loading="lazy">
+      <div class="blog-info">
+            <p class="price">
+            <span class="new-price">${product.price}</span>
+  <span class="old-price">${product.oldPrice}</span>
+</p>
+<p class="discount">Économisez ${product.savings}</p>
+      <div class="alternating-titles">
+  <svg class="mp" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+    <path d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"></path>
+  </svg>
+  <span class="t1">Adresse</span>
+
+  <!-- الحاوية الجديدة -->
+  <div class="container-b1-t2">
+    <div class="B1">
+      <img src="/img boutiques/images (12) (26).jpeg" alt="Option 4">
+    </div>
+    <span class="t2">Boutique 1</span>
+  </div>
+</div>
+    `;
+
+    // إضافة أحداث للنقر
+    blog.addEventListener('click', () => {
+      highlightCurrentBlog(blog);
+      displayModal(product);
+    });
+
+    blog.querySelector('.alternating-titles').addEventListener('click', (event) => {
+      event.stopPropagation(); // منع الحدث من الانتشار إلى العناصر الأب
+      openIframeModal();
+    });
+
+    container.appendChild(blog);
+  });
+}
+   
+  // وظيفة لتحديث محتوى النافذة المنبثقة
+  function updateModalContent(product) {
+  modalDescriptionContainer.innerHTML = `
+  <p class="description">
+   ${product.description}</p>
+    <p class="price">${product.price}</p>
+   <p class="ratting">
+            <svg class="sr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+  <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.2 23 46 46.4 33.7L288 439.6l130.6 68.7c23.4 12.3 50.9-7.5 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6l-146.1-21.3L316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" />
+</svg>
+
+                <span class="score">${product.ratting}</span></p>
+  <div class="m-container">
+  <button class="main-button">Adresse de la boutique</button>
+    </div>
+   </div>
+ </div>
+ `;
+  // إضافة مستمع حدث للنقر لفتح نافذة iframe المنبثقة
+  modalDescriptionContainer.querySelector('.main-button').addEventListener('click', (event) => {
+  event.stopPropagation();
+  openIframeModal();
+  });
+  updateProductList(product);
+}
+
+  // وظيفة لتحديث عرض الشرائح
+  function updateSlideshow(images) {
+  slideshow.innerHTML = '';
+
+  images.forEach((image, index) => {
+    const slide = document.createElement('div');
+    slide.classList.add('slide');
+    slide.innerHTML = `<img src="${image}" alt="Slide ${index + 1}" loading="lazy">`;
+    slideshow.appendChild(slide);
+  });
+
+  let currentIndex = 0;
+  let autoScrollInterval = setInterval(scrollToNextSlide, 1000);
+
+  function scrollToNextSlide() {
+    currentIndex = (currentIndex + 1) % images.length;
+    slideshow.scrollLeft = slideshow.offsetWidth * currentIndex;
+  }
+
+  function stopAutoScroll() {
+    clearInterval(autoScrollInterval);
+  }
+
+  // Stop auto-scroll on manual scroll
+  slideshow.addEventListener('scroll', () => {
+    stopAutoScroll();
+  });
+
+  // Optional: Restart auto-scroll after a period of inactivity
+  let manualScrollTimeout;
+  slideshow.addEventListener('scroll', () => {
+    clearTimeout(manualScrollTimeout);
+    manualScrollTimeout = setTimeout(() => {
+      autoScrollInterval = setInterval(scrollToNextSlide, 1000);
+    }, 7000); // 5 seconds of inactivity
+  });
+
+  setTimeout(() => {
+    slideshow.scrollLeft = 0;
+  }, 0);
+}
+  // وظيفة لتحديث قائمة المنتجات في النافذة المنبثقة
+  function updateProductList(currentProduct)
+  {
+  const sortedProducts = [currentProduct, ...products.filter(prod => prod !== currentProduct)];
+  productList.innerHTML = ''; // مسح المحتوى القديم
+  sortedProducts.forEach((prod) => {
+  const productItem = document.createElement('div');
+  productItem.classList.add('product-item');
+  productItem.innerHTML = `
+  <img src="${prod.images[0]}" alt="Product image" loading="lazy">
+  <p class="description">${prod.description}</p>
+  <p class="ratting2">
+            <svg class="sr2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+  <path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.2 23 46 46.4 33.7L288 439.6l130.6 68.7c23.4 12.3 50.9-7.5 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6l-146.1-21.3L316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z" />
+</svg>
+
+                <span class="score2">${prod.ratting}</span></p>
+  <p class="price">${prod.price}</p>`;
+  productItem.addEventListener('click', () =>
+  {
+  modal.style.display = 'none';
+      displayModal(prod);
+  });
+  productList.appendChild(productItem);
+  });
+  setTimeout(() => {
+    productList.scrollLeft = 0; 
+  }, 0);
+}
+  // وظيفة لتظليل العنصر الحالي
+  function highlightCurrentBlog(blog) {
+    if (currentOpenBlog && currentOpenBlog !== blog) 
+    currentOpenBlog = blog;
+  }
+ // وظيفة لعرض نافذة المنتج
+  function displayModal(product) {
+  currentModalProduct = product;
+  updateSlideshow(product.images);
+  updateModalContent(product);
+  modal.style.display = 'flex';
+
+  // إعادة التمرير لأعلى العنصر .modal-content
+  const modalContent = modal.querySelector('.modal-content');
+  if (modalContent) {
+    modalContent.scrollTop = 0;
+  }
+  document.body.style.overflow = 'hidden';
+  if (isProductFromHomepage) {
+    history.pushState({ productModalOpen: true }, '', location.pathname + "#product-modal");
+    isProductFromHomepage = false;
+  }
+}
+
+  function openIframeModal() {
+  iframeModal.style.display = 'flex';
+  iframeContent.src = "https://www.google.com/maps/d/u/0/embed?mid=1Cr7b5xePZ3C0B747aW61R30mDt2c-DY&ehbc=2E312F";
+  document.body.style.overflow = 'hidden';
+  modal.style.overflow = 'hidden';
+  history.pushState({ iframeModalOpen: true }, '', location.pathname + "#iframeModal");
+}
+  function closeAllModals() {
+  if (iframeModal.style.display === 'flex') {
+    iframeModal.style.display = 'none';
+    iframeContent.src = "";
+    history.replaceState(null, '', location.pathname);
+    modal.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
+  }
+  if (modal.style.display === 'flex') {
+    modal.style.display = 'none';
+    isProductFromHomepage = true;
+    history.replaceState(null, '', location.pathname);
+    document.body.style.overflow = 'auto';
+  }
+  if (iframeModal.style.display === 'none' && modal.style.display === 'none') {
+    document.body.style.overflow = 'auto';
+  }
+}
+window.addEventListener('popstate', (event) => {
+  if (event.state && event.state.iframeModalOpen) {
+    iframeModal.style.display = 'flex';
+    modal.style.display = 'none';
+    document.body.style.overflow = 'hidden'; 
+  } else if (event.state && event.state.productModalOpen) {
+    modal.style.display = 'flex';
+    iframeModal.style.display = 'none';
+    document.body.style.overflow = 'hidden';
+  } else {
+    closeAllModals();
+  }
+});
+window.addEventListener("scroll", function() {
+  const logo2 = document.querySelector(".logo2");
+
+  // التحقق مما إذا كان القسم logo2 في أعلى الصفحة
+  if (logo2.getBoundingClientRect().top === 0) {
+    logo2.classList.add("no-radius");
+  } else {
+    logo2.classList.remove("no-radius");
+  }
+});
+function scrollToSection() {
+  const section = document.querySelector('.header'); // تحديد القسم باستخدام class
+  if (section) { // التحقق من وجود العنصر
+    section.scrollIntoView({ behavior: 'smooth' }); // تمرير سلس للقسم
+  } else {
+    console.error('العنصر الذي تحاول التمرير إليه غير موجود.');
+  }
+}
+const ouvrir = document.querySelector('.ouvrir'); // حدد العنصر .ouvrir
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY; // قيمة التمرير العمودي
+  const maxScroll = 200; // الحد الأعلى الذي يختفي عنده العنصر
+
+  // حساب نسبة الشفافية بناءً على التمرير
+  const opacity = Math.max(1 - scrollY / maxScroll, 0);
+  ouvrir.style.opacity = opacity; // تغيير الشفافية للعنصر بأكمله
+});
+</script>
+</body>
+</html>
