@@ -1,1 +1,9 @@
-[]
+{
+  "66": {
+    "code": "66",
+    "name": "T8",
+    "price": "80",
+    "image": "img/104288_VO-UmpOkigKlCMeXf4wG5ztnl_max.webp",
+    "inStock": true
+  }
+}
