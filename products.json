@@ -1,4 +1,11 @@
 {
+  "11": {
+    "code": "11",
+    "name": "T2",
+    "price": "90",
+    "image": "img/360_F_1025120936_7lGlJfm06qJmoUELpe4fZwCfxMG0uRAw.jpg",
+    "inStock": true
+  },
   "66": {
     "code": "66",
     "name": "T9",
