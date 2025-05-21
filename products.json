@@ -76,7 +76,13 @@
   null,
   null,
   null,
-  null,
+  {
+    "code": "77",
+    "name": "T8",
+    "price": "80",
+    "image": "img/452260797_919947656605629_4035277211699045792_n.jpg",
+    "inStock": true
+  },
   null,
   null,
   null,
