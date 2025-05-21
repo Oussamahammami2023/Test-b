@@ -5,5 +5,12 @@
     "price": "80",
     "image": "img/104288_VO-UmpOkigKlCMeXf4wG5ztnl_max.webp",
     "inStock": true
+  },
+  "77": {
+    "code": "77",
+    "name": "T9",
+    "price": "90",
+    "image": "img/Orange_and_Purple_Gradient_Modern_Motivational_Quote_Tweet_Instagram_Post_20250520_015946_0000-removebg-preview.png",
+    "inStock": true
   }
 }
