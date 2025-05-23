@@ -26,5 +26,12 @@
     "price": "90",
     "image": "img/Orange_and_Purple_Gradient_Modern_Motivational_Quote_Tweet_Instagram_Post_20250520_015946_0000-removebg-preview.png",
     "inStock": true
+  },
+  "Cme": {
+    "code": "Cme",
+    "name": "T3",
+    "price": "90",
+    "image": "img/31zyWkrw-ML._AC_UX450_UY450_SR450,450_.jpg",
+    "inStock": true
   }
 }
