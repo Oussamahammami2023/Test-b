@@ -58,5 +58,14 @@
       "img/1748058938673_1000110697.png"
     ],
     "inStock": true
+  },
+  "J": {
+    "code": "J",
+    "name": "J",
+    "price": "J",
+    "images": [
+      "img/1748058959095_1000110693.png"
+    ],
+    "inStock": true
   }
 }
