@@ -40,5 +40,12 @@
     "price": "Gh",
     "image": "img/1000110701.png",
     "inStock": true
+  },
+  "Yy": {
+    "code": "Yy",
+    "name": "Yy",
+    "price": "Hy",
+    "image": "img/1000110699.png",
+    "inStock": true
   }
 }
