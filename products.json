@@ -33,5 +33,12 @@
     "price": "90",
     "image": "img/31zyWkrw-ML._AC_UX450_UY450_SR450,450_.jpg",
     "inStock": true
+  },
+  "Ii": {
+    "code": "Ii",
+    "name": "Ty",
+    "price": "Gh",
+    "image": "img/1000110701.png",
+    "inStock": true
   }
 }
