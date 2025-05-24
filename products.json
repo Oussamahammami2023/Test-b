@@ -47,5 +47,16 @@
     "price": "Hy",
     "image": "img/1000110699.png",
     "inStock": true
+  },
+  "H": {
+    "code": "H",
+    "name": "H",
+    "price": "H",
+    "images": [
+      "img/1748058935136_1000110701.png",
+      "img/1748058937538_1000110699.png",
+      "img/1748058938673_1000110697.png"
+    ],
+    "inStock": true
   }
 }
