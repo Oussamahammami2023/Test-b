@@ -1,1 +1,15 @@
-{}
+{
+  "61940024": {
+    "code": "61940024",
+    "name": "V",
+    "description": "B",
+    "price": "V",
+    "oldPrice": "H",
+    "size": "H",
+    "images": [
+      "img/1748666899458_images.jpeg"
+    ],
+    "inStock": true,
+    "dateAdded": "2025-05-31T04:48:20.660Z"
+  }
+}
