@@ -1,15 +1,1 @@
-{
-  "61940024": {
-    "code": "61940024",
-    "name": "T9",
-    "description": "G",
-    "price": "90",
-    "oldPrice": "F",
-    "size": "S",
-    "images": [
-      "img/1748662672407_images_(10).jpeg"
-    ],
-    "inStock": true,
-    "dateAdded": "2025-05-31T03:37:53.436Z"
-  }
-}
+{}
