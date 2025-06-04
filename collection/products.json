@@ -22,5 +22,17 @@
       "img/1748884376909_pexels-photo-2680270.jpeg"
     ],
     "inStock": true
+  },
+  "1749074499557": {
+    "code": "1749074499557",
+    "name": "T",
+    "description": "H",
+    "price": "Y",
+    "oldPrice": "J",
+    "size": "40",
+    "images": [
+      "img/1749074499658_IMG_20250603_184735.jpg"
+    ],
+    "inStock": true
   }
 }
